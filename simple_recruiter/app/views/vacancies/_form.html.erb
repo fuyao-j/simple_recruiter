@@ -1,0 +1,44 @@
+<%= form_with(model: vacancy, local: true) do |form| %>
+  <% if vacancy.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(vacancy.errors.count, "error") %> prohibited this vacancy from being saved:</h2>
+
+      <ul>
+        <% vacancy.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :level %>
+    <%= form.select :level, options_for_select(Vacancy.levels.keys.to_a) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, options_for_select(Vacancy.statuses.keys.to_a) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_close %>
+    <%= form.date_select :date_close %>
+  </div>
+
+  <div class="field">
+    <%= form.label :candidates %><br />
+    <%= form.select :candidate_ids,
+                    options_for_select(Candidate.all.map{|c|["#{c.first_name} #{c.last_name}", c.id]}, vacancy.candidate_ids),
+                    {}, {multiple: true} %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

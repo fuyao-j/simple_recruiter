@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @vacancy.name %>
+</p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @vacancy.level %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @vacancy.status %>
+</p>
+
+<p>
+  <strong>Date close:</strong>
+  <%= @vacancy.date_close %>
+</p>
+
+<p>
+  <strong>Date created:</strong>
+
+</p>
+
+
+<p>
+  <strong>Candidates:</strong><br>
+  <% @vacancy.candidates.each do |candidate| %>
+    <%= link_to "#{candidate.first_name}, #{candidate.last_name}" , candidate %><br>
+  <% end %>
+</p>
+
+
+<%= link_to 'Edit', edit_vacancy_path(@vacancy) %> |
+<%= link_to 'Back', vacancies_path %>
